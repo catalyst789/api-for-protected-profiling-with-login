@@ -30,7 +30,7 @@ router.post('/reg', function(req, res){
     userModel.register(newUser, req.body.password)
     .then(function(u){
       passport.authenticate('local')(req, res, function(){
-        res.status(201).json('User Successfully Regsitered');
+        res.status(201).json({message: 'User Successfully Regsitered'});
       })
     })
     .catch(function(err){
@@ -41,7 +41,7 @@ router.post('/reg', function(req, res){
   /*Post Routes user Login*/
   router.post('/login', passport.authenticate('local', {
   }), function(req, res, next){
-      res.status(200).json('User Succesfully Logged In');
+      res.status(200).json({message: 'User Succesfully Logged In'});
   });
   
   /** GET Profile Page */
@@ -55,7 +55,7 @@ router.post('/reg', function(req, res){
   /** GET Logout User */
   router.get('/logout', function(req, res, next){
     req.logOut();
-    res.redirect('/');
+    res.json({message: 'Successfully Logged OUT ..!'})
   })
 
   /*Post Routes user's Profile Update*/
